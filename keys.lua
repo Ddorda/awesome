@@ -2,6 +2,26 @@
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
+    awful.key({ modkey, "Shift"   }, "Left",
+        function (c)
+            local curidx = awful.tag.getidx()
+            if curidx == 1 then
+                awful.client.movetotag(tags[client.focus.screen][9])
+            else
+                awful.client.movetotag(tags[client.focus.screen][curidx-1])
+            end
+            awful.tag.viewprev()
+        end),
+    awful.key({ modkey, "Shift"   }, "Right",
+        function (c)
+            local curidx = awful.tag.getidx()
+            if curidx == 9 then
+                awful.client.movetotag(tags[client.focus.screen][1])
+            else
+                awful.client.movetotag(tags[client.focus.screen][curidx + 1])
+            end
+             awful.tag.viewnext()
+        end),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
     awful.key({ modkey,           }, "j",
