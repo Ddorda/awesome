@@ -5,4 +5,5 @@ kbdcfg.switch = function ()
   current_kb = io.popen("xkb-switch -p -n"):read("*l")
   kbdcfg.widget:set_text(" " .. current_kb .. " ")
 end
+kbdcfg.switch() -- twice, ugly hack for init with primary language
 kbdcfg.switch()
