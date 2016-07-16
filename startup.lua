@@ -7,7 +7,7 @@ autorun_apps =
    "xscreensaver -no-splash"
 }
 for app = 1, #autorun_apps do
-   awful.util.spawn(app)
+   awful.util.spawn(autorun_apps[app])
 end
 
 -- }}}
