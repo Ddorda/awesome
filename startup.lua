@@ -27,4 +27,7 @@ for app = 1, #autorun_apps do
 	   awful.util.spawn(cur_app.cmd)
 	end
 end
+
+kbdcfg.set_layout("us")
+
 -- }}}
