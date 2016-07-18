@@ -11,27 +11,11 @@ volume.down_step = "5%-"
 volume.state = ""
 volume.level = 0
 --widget functions
-volume.set_volume = function(self, control, amount)
-  io.popen(string.format(self.set_volume_cmd, control, amount))
-  self:refresh()
-end
 
-volume.vol_up = function(self)
-  self:set_volume(self.main_control, self.up_step)
-end
-
-volume.vol_down = function(self)
-  self:set_volume(self.main_control, self.down_step)
-end
-
-volume.vol_toggle = function(self)
-  self:set_volume(self.main_control, self.toggle)
-end
-
-
-volume.refresh = function(self)
+volume.execute_and_update_widget = function(self, command)
+  --execute given command, parse it and update the widget
   local current_line
-  local stream = io.popen(self.get_info_cmd .. self.main_control)
+  local stream = io.popen(command)
 
   current_line = stream:read("*l")
   while (current_line) do
@@ -51,6 +35,27 @@ volume.refresh = function(self)
   end
 
   self.bar:set_value(self.level)
+end
+
+volume.set_volume = function(self, control, amount)
+  self:execute_and_update_widget(string.format(self.set_volume_cmd, control, amount))
+end
+
+volume.vol_up = function(self)
+  self:set_volume(self.main_control, self.up_step)
+end
+
+volume.vol_down = function(self)
+  self:set_volume(self.main_control, self.down_step)
+end
+
+volume.vol_toggle = function(self)
+  self:set_volume(self.main_control, self.toggle)
+end
+
+
+volume.refresh = function(self)
+  self:execute_and_update_widget(self.get_info_cmd .. self.main_control)
 end
 
 --actual widget
