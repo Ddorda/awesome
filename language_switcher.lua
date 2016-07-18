@@ -16,5 +16,3 @@ kbdcfg.set_layout = function(layout)
   end
     return false
 end
-os.execute("setxkbmap us,il")
-kbdcfg.set_layout("us")
