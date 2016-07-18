@@ -1,11 +1,16 @@
 -- {{{ Wibox
 require("language_switcher")
+require("battery_widget")
+require("volume_widget")
 
 local calendar = require('calendar35')
 
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
 calendar.addCalendarToWidget(mytextclock)
+
+-- Divider
+divider = wibox.widget.textbox(" | ")
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -86,7 +91,26 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
+    
+    right_layout:add(divider)
+
+    --volume
+    right_layout:add(volume.icon)
+    right_layout:add(volume.barmargin)
+
+    right_layout:add(divider)
+
+    -- battery
+    right_layout:add(battery.icon)
+    right_layout:add(battery.barmargin)
+
+    right_layout:add(divider)
+
+    --keyboard layout
     right_layout:add(kbdcfg.widget)
+
+    right_layout:add(divider)
+
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 

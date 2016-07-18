@@ -1,7 +1,8 @@
 -- {{{ Variable definitions
 
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+--beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+beautiful.init("~/.config/awesome/theme.lua")
 
 -- {{{ Wallpaper
 if beautiful.wallpaper then
