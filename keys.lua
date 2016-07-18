@@ -50,7 +50,11 @@ globalkeys = awful.util.table.join(
                 client.focus:raise()
             end
         end),
-
+    -- Multimedia Keys
+    awful.key({ }, "XF86AudioRaiseVolume", function () volume:vol_up() end),
+    awful.key({ }, "XF86AudioLowerVolume", function () volume:vol_down() end),
+    awful.key({ }, "XF86AudioMute", function () volume:vol_toggle() end),
+    
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
@@ -68,17 +72,27 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey },            "r",     function () 
+      if kbdcfg.set_layout("us") then
+        mypromptbox[mouse.screen]:run()
+      end
+    end),
 
     awful.key({ modkey }, "x",
               function ()
+                if kbdcfg.set_layout("us") then
                   awful.prompt.run({ prompt = "Run Lua code: " },
                   mypromptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
+                end
               end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end),
+    awful.key({ modkey }, "p", function()
+        if kbdcfg.set_layout("us") then
+          menubar.show()
+        end
+      end),
 
     -- Keyboard
     awful.key({ "Mod1" }, "space", function () kbdcfg.switch() end)
