@@ -3,7 +3,7 @@ volume = {}
 
 volume.main_control = "Master"
 volume.refresh_timeout = 120
-volume.set_volume_cmd = "amixer set %s %s"
+volume.set_volume_cmd = "amixer set %s %s -D pulse"
 volume.get_info_cmd = "amixer get "
 volume.toggle = "toggle"
 volume.up_step = "5%+"
@@ -19,7 +19,7 @@ volume.execute_and_update_widget = function(self, command)
 
   current_line = stream:read("*l")
   while (current_line) do
-    level, state = string.match(current_line, "%s*%a+:%s%a+%s%d+%s%[(%d+)%%%]%s%[[%-%+0-9dB.]+%]%s%[([onf]+)%]")
+    level, state = string.match(current_line, ".*%[(%d+)%%%].*%[([onf]+)%]")
     if level and state then
       break
     end
