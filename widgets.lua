@@ -2,6 +2,7 @@
 require("language_switcher")
 require("battery_widget")
 require("volume_widget")
+require("music_widget")
 
 local calendar = require('calendar35')
 

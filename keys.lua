@@ -51,9 +51,14 @@ globalkeys = awful.util.table.join(
             end
         end),
     -- Multimedia Keys
+    -- Volume
     awful.key({ }, "XF86AudioRaiseVolume", function () volume:vol_up() end),
     awful.key({ }, "XF86AudioLowerVolume", function () volume:vol_down() end),
     awful.key({ }, "XF86AudioMute", function () volume:vol_toggle() end),
+    -- Music
+    awful.key({ }, "XF86AudioNext", function () music:next() end),
+    awful.key({ }, "XF86AudioPlay", function () music:toggle() end),
+    awful.key({ }, "XF86AudioPrev", function () music:prev() end),
     
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
