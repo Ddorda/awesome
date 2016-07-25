@@ -7,11 +7,12 @@ wibox = require("wibox")
 beautiful = require("beautiful")
 naughty = require("naughty") 
 menubar = require("menubar") 
+require("functions")
 
 beautiful.init(confdir .. "/theme.lua")
-require('pre_config')
+require("pre_config")
 require("config")
-require('post_config')
+require("post_config")
 
 require("debian.menu")		-- Load Debian menu entries  
 require("look")            -- Theme / Layouts

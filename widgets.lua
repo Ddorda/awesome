@@ -86,18 +86,7 @@ for s = 1, screen.count() do
   -- Widgets that are aligned to the right
   local right_layout = wibox.layout.fixed.horizontal()
   if s == 1 then right_layout:add(wibox.widget.systray()) end
-  
-  config.widgets.layouts.right = {
-    config.widgets.divider,
-    config.widgets.libs.volume.icon, -- volume
-    config.widgets.libs.volume.barmargin,
-    config.widgets.divider,
-    config.widgets.libs.battery.icon, -- battery
-    config.widgets.libs.battery.barmargin,
-    config.widgets.divider,
-    config.widgets.libs.kbswitch.widget, -- keyboard
-    config.widgets.divider
-  }
+
   for _,v in pairs(config.widgets.layouts.right) do
     right_layout:add(v)
   end

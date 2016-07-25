@@ -7,6 +7,7 @@ config.programs = {}
 config.layouts = {}
 config.tags = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
 config.widgets = {}
+config.widgets.layouts = {}
 
 --
 -- Keyboard
@@ -20,40 +21,10 @@ config.widgets = {}
 config.keyboard.modkey = "Mod4"
 
 --
--- Theme
---
-
-config.theme.path = "/usr/share/awesome/themes/default/theme.lua"
-
-
---
 -- Widgets
 --
 
 -- register widgets
-function scan_lua_files(dir)
-    local files = {}
-    local pfile = io.popen(string.format('ls %s/*.lua', dir))
-    for line in pfile:lines() do
-        table.insert(files, line)
-    end
-    pfile:close()
-    table.sort(files)
-    return files
-end
-
-function Set (list)
-  local set = {}
-  for _, l in ipairs(list) do set[l] = true end
-  return set
-end
-
-function countSet(set)
-  local count = 0
-  for _ in pairs(set) do count = count + 1 end
-  return count
-end
-
 config.widgets.libs = Set {}
 
 justwidgets = scan_lua_files(confdir .. '/widgets')
@@ -62,5 +33,16 @@ for i=1, #justwidgets do
     config.widgets.libs[widget_name] = require(".widgets." .. widget_name)
 end
 
-config.widgets.layouts = {}
+config.widgets.layouts.right = {
+  config.widgets.divider,
+  config.widgets.libs.volume.icon, -- volume
+  config.widgets.libs.volume.barmargin,
+  config.widgets.divider,
+  config.widgets.libs.battery.icon, -- battery
+  config.widgets.libs.battery.barmargin,
+  config.widgets.divider,
+  config.widgets.libs.kbswitch.widget, -- keyboard
+  config.widgets.divider
+}
+
 config.widgets.divider = wibox.widget.textbox(" | ")
