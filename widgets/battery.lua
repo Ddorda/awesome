@@ -1,8 +1,8 @@
 -- Battery widget
-battery = {}
+local battery = {}
 
-battery.battery = "BAT0"
-battery.ac = "AC0"
+battery.battery = "BAT1"
+battery.ac = "ACAD"
 battery.timeout = 30
 battery.ps_path = "/sys/class/power_supply/"
 battery.critical_precentage = 15
@@ -64,26 +64,27 @@ battery.refresh = function(self)
 end
 
 --actual widget
-battery.icon = wibox.widget.imagebox(beautiful.battery)
-battery.bar = awful.widget.progressbar() 
-battery.bar:set_ticks(true)
-battery.bar:set_ticks_size(5)
-battery.bar:set_width(48)
-battery.bar:set_max_value(100)
+battery._init = function()
+  battery.icon = wibox.widget.imagebox(beautiful.battery)
+  battery.bar = awful.widget.progressbar() 
+  battery.bar:set_ticks(true)
+  battery.bar:set_ticks_size(5)
+  battery.bar:set_width(48)
+  battery.bar:set_max_value(100)
 
-battery.bar:set_color(beautiful.fg_normal)
-battery.bar:set_background_color(beautiful.battery_bg)
-battery.layout = wibox.layout.fixed.horizontal()
-battery.layout:add(battery.bar)
-battery.barmargin = wibox.layout.margin(battery.layout, 2, 2, 5, 6)
-battery:refresh()
-
-
---TODO add dbus event
--- timer declaration
-battery_timer = timer({timeout = battery.timeout})
-battery_timer:connect_signal("timeout", function()  battery:refresh() end)
-battery_timer:start()
+  battery.bar:set_color(beautiful.fg_normal)
+  battery.bar:set_background_color(beautiful.battery_bg)
+  battery.layout = wibox.layout.fixed.horizontal()
+  battery.layout:add(battery.bar)
+  battery.barmargin = wibox.layout.margin(battery.layout, 2, 2, 5, 6)
+  battery:refresh()
 
 
+  --TODO add dbus event
+  -- timer declaration
+  battery.timer = timer({timeout = battery.timeout})
+  battery.timer:connect_signal("timeout", function()  battery:refresh() end)
+  battery.timer:start()
+end
 
+return battery

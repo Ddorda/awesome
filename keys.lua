@@ -1,4 +1,6 @@
 -- {{{ Key bindings
+modkey = config.keyboard.modkey
+
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
@@ -51,9 +53,9 @@ globalkeys = awful.util.table.join(
             end
         end),
     -- Multimedia Keys
-    awful.key({ }, "XF86AudioRaiseVolume", function () volume:vol_up() end),
-    awful.key({ }, "XF86AudioLowerVolume", function () volume:vol_down() end),
-    awful.key({ }, "XF86AudioMute", function () volume:vol_toggle() end),
+    awful.key({ }, "XF86AudioRaiseVolume", function () config.widgets.libs.volume:vol_up() end),
+    awful.key({ }, "XF86AudioLowerVolume", function () config.widgets.libs.volume:vol_down() end),
+    awful.key({ }, "XF86AudioMute", function () config.widgets.libs.volume:vol_toggle() end),
     
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
@@ -73,14 +75,14 @@ globalkeys = awful.util.table.join(
 
     -- Prompt
     awful.key({ modkey },            "r",     function () 
-      if kbdcfg.set_layout("us") then
+      if config.widgets.libs.kbswitch.set_layout(config.widgets.libs.kbswitch.primary_lang) then
         mypromptbox[mouse.screen]:run()
       end
     end),
 
     awful.key({ modkey }, "x",
               function ()
-                if kbdcfg.set_layout("us") then
+                if config.widgets.libs.kbswitch.set_layout(config.widgets.libs.kbswitch.primary_lang) then
                   awful.prompt.run({ prompt = "Run Lua code: " },
                   mypromptbox[mouse.screen].widget,
                   awful.util.eval, nil,
@@ -89,13 +91,13 @@ globalkeys = awful.util.table.join(
               end),
     -- Menubar
     awful.key({ modkey }, "p", function()
-        if kbdcfg.set_layout("us") then
+        if config.widgets.libs.kbswitch.set_layout(config.widgets.libs.kbswitch.primary_lang) then
           menubar.show()
         end
       end),
 
     -- Keyboard
-    awful.key({ "Mod1" }, "space", function () kbdcfg.switch() end)
+    awful.key(config.keyboard.switch_keys[1], config.keyboard.switch_keys[2], function () config.widgets.libs.kbswitch.switch() end)
 )
 
 clientkeys = awful.util.table.join(

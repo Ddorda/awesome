@@ -91,7 +91,7 @@ theme.layout_dwindle = "/usr/share/awesome/themes/default/layouts/dwindlew.png"
 
 theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png"
 
-theme.icons_dir = os.getenv("HOME") .. "/.config/awesome/icons/"
+theme.icons_dir = confdir .. "/icons/"
 
 theme.ac = theme.icons_dir .. "ac.png"
 theme.battery = theme.icons_dir .. "bat.png"
@@ -106,4 +106,6 @@ theme.vol_bg = "#000000"
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = nil
 
+
+-- for k,v in pairs(config.theme) do theme[k] = v end
 return theme

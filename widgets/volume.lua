@@ -1,9 +1,9 @@
 -- Volume widget
-volume = {}
+local volume = {}
 
 volume.main_control = "Master"
 volume.refresh_timeout = 120
-volume.set_volume_cmd = "amixer set %s %s"
+volume.set_volume_cmd = "amixer set %s %s -D pulse"
 volume.get_info_cmd = "amixer get "
 volume.toggle = "toggle"
 volume.up_step = "5%+"
@@ -19,7 +19,7 @@ volume.execute_and_update_widget = function(self, command)
 
   current_line = stream:read("*l")
   while (current_line) do
-    level, state = string.match(current_line, "%s*%a+:%s%a+%s%d+%s%[(%d+)%%%]%s%[[%-%+0-9dB.]+%]%s%[([onf]+)%]")
+    level, state = string.match(current_line, ".*%[(%d+)%%%].*%[([onf]+)%]")
     if level and state then
       break
     end
@@ -59,26 +59,27 @@ volume.refresh = function(self)
 end
 
 --actual widget
-volume.icon = wibox.widget.imagebox(beautiful.vol_on)
-volume.bar = awful.widget.progressbar() 
-volume.bar:set_ticks(true)
-volume.bar:set_ticks_size(1)
-volume.bar:set_width(48)
-volume.bar:set_max_value(100)
+volume._init = function()
+  volume.icon = wibox.widget.imagebox(beautiful.vol_on)
+  volume.bar = awful.widget.progressbar() 
+  volume.bar:set_ticks(true)
+  volume.bar:set_ticks_size(1)
+  volume.bar:set_width(48)
+  volume.bar:set_max_value(100)
 
-volume.bar:set_color(beautiful.fg_normal)
-volume.bar:set_background_color(beautiful.volume_bg)
-volume.layout = wibox.layout.fixed.horizontal()
-volume.layout:add(volume.bar)
-volume.barmargin = wibox.layout.margin(volume.layout, 0, 2, 5, 6)
-volume:refresh()
-
-
---TODO add dbus event
--- timer declaration
-volume_timer = timer({timeout = volume.refresh_timeout})
-volume_timer:connect_signal("timeout", function()  volume:refresh() end)
-volume_timer:start()
+  volume.bar:set_color(beautiful.fg_normal)
+  volume.bar:set_background_color(beautiful.volume_bg)
+  volume.layout = wibox.layout.fixed.horizontal()
+  volume.layout:add(volume.bar)
+  volume.barmargin = wibox.layout.margin(volume.layout, 0, 2, 5, 6)
+  volume:refresh()
 
 
+  --TODO add dbus event
+  -- timer declaration
+  volume.timer = timer({timeout = volume.refresh_timeout})
+  volume.timer:connect_signal("timeout", function()  volume:refresh() end)
+  volume.timer:start()
+end
 
+return volume
