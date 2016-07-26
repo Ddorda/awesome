@@ -25,7 +25,8 @@ config.keyboard.modkey = "Mod4"
 --
 
 -- register widgets
-config.widgets.libs = Set {}
+config.widgets.libs = {}
+config.widgets.enable = Set {}
 
 justwidgets = scan_lua_files(confdir .. '/widgets')
 for i=1, #justwidgets do
@@ -33,16 +34,16 @@ for i=1, #justwidgets do
     config.widgets.libs[widget_name] = require(".widgets." .. widget_name)
 end
 
-config.widgets.layouts.right = {
-  config.widgets.divider,
-  config.widgets.libs.volume.icon, -- volume
-  config.widgets.libs.volume.barmargin,
-  config.widgets.divider,
-  config.widgets.libs.battery.icon, -- battery
-  config.widgets.libs.battery.barmargin,
-  config.widgets.divider,
-  config.widgets.libs.kbswitch.widget, -- keyboard
-  config.widgets.divider
-}
-
 config.widgets.divider = wibox.widget.textbox(" | ")
+
+config.widgets.layouts.right = {
+  "config.widgets.divider",
+  "config.widgets.libs.volume.icon", -- volume
+  "config.widgets.libs.volume.barmargin",
+  "config.widgets.divider",
+  "config.widgets.libs.battery.icon", -- battery
+  "config.widgets.libs.battery.barmargin",
+  "config.widgets.divider",
+  "config.widgets.libs.kbswitch.widget", -- keyboard
+  "config.widgets.divider"
+}
