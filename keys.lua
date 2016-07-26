@@ -58,7 +58,7 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86AudioMute", function () config.widgets.libs.volume:vol_toggle() end),
     
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "Return", function () awful.util.spawn(config.programs.terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 

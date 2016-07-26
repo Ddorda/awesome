@@ -1,8 +1,5 @@
 -- {{{ Variable definitions
 
--- Theme
-
-
 -- {{{ Wallpaper
 if beautiful.wallpaper then
     for s = 1, screen.count() do
@@ -12,7 +9,8 @@ end
 -- }}}
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
-layouts = config.layouts or {
+if #config.layouts == 0 then
+  layouts =  {
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
@@ -25,6 +23,9 @@ layouts = config.layouts or {
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier,
     awful.layout.suit.floating
-}
+  }
+else
+  layouts = config.layouts
+end
 
 -- }}}
