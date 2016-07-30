@@ -20,6 +20,7 @@ kbswitch.set_layout = function(layout)
     return false
 end
 kbswitch._init = function()
+  awful.util.spawn(kbswitch.init_command)
   kbswitch.widget = wibox.widget.textbox()
   kbswitch.set_layout(kbswitch.primary_lang)
 end
