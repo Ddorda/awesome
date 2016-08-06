@@ -1,5 +1,4 @@
 -- {{{ Wibox
-
 local calendar = require('calendar35')
 
 -- Create a textclock widget

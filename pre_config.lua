@@ -3,6 +3,7 @@
 config = {}
 config.keyboard = {}
 config.theme = {}
+config.theme = beautiful
 config.programs = {}
 config.layouts = {}
 config.tags = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
@@ -19,14 +20,16 @@ config.widgets.layouts = {}
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
 config.keyboard.modkey = "Mod4"
-
+config.keyboard.switch_keys = {{ "Mod1" }, "Shift_L"}
+config.programs.terminal = "x-terminal-emulator"
+config.programs.editor = os.getenv("EDITOR") or "vim"
 --
 -- Widgets
 --
 
 -- register widgets
 config.widgets.libs = {}
-config.widgets.enable = Set {}
+config.widgets.enable = Set {'kbswitch', 'volume', 'battery', 'music'}
 
 justwidgets = scan_lua_files(confdir .. '/widgets')
 for i=1, #justwidgets do
@@ -47,3 +50,4 @@ config.widgets.layouts.right = {
   "config.widgets.libs.kbswitch.widget", -- keyboard
   "config.widgets.divider"
 }
+
