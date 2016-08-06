@@ -37,7 +37,7 @@ config.programs.editor = os.getenv("EDITOR") or "vim"
 
 -- register widgets
 config.widgets.libs = {}
-config.widgets.enable = Set {'kbswitch', 'volume', 'battery', 'music'}
+config.widgets.enable = Set {}
 
 justwidgets = scan_lua_files(confdir .. '/widgets')
 for i=1, #justwidgets do
