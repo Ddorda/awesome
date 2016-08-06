@@ -1,3 +1,4 @@
+-- FILES
 function scan_lua_files(dir)
     local files = {}
     local pfile = io.popen(string.format('ls %s/*.lua', dir))
@@ -9,6 +10,7 @@ function scan_lua_files(dir)
     return files
 end
 
+-- Set
 function Set (list)
   local set = {}
   for _, l in ipairs(list) do set[l] = true end

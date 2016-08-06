@@ -3,12 +3,19 @@
 config = {}
 config.keyboard = {}
 config.theme = {}
-config.theme = beautiful
 config.programs = {}
 config.layouts = {}
 config.tags = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
 config.widgets = {}
 config.widgets.layouts = {}
+
+--
+-- Theme
+--
+
+-- init theme. can be modified on the fly
+beautiful.init(confdir .. "/theme.lua")
+config.theme = beautiful
 
 --
 -- Keyboard
@@ -23,6 +30,7 @@ config.keyboard.modkey = "Mod4"
 config.keyboard.switch_keys = {{ "Mod1" }, "Shift_L"}
 config.programs.terminal = "x-terminal-emulator"
 config.programs.editor = os.getenv("EDITOR") or "vim"
+
 --
 -- Widgets
 --
