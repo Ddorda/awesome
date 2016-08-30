@@ -56,6 +56,7 @@ config.widgets.layouts.right = {
   "config.widgets.libs.battery.barmargin",
   "config.widgets.divider",
   "config.widgets.libs.kbswitch.widget", -- keyboard
-  "config.widgets.divider"
+  "config.widgets.divider",
+  "config.widgets.libs.clockal.clock_widget" -- clock+calendar
 }
 
