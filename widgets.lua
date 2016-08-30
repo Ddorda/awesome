@@ -1,9 +1,9 @@
 -- {{{ Wibox
-local calendar = require('calendar35')
+-- local calendar = require('calendar35')
 
 -- Create a textclock widget
-mytextclock = awful.widget.textclock()
-calendar.addCalendarToWidget(mytextclock)
+-- mytextclock = awful.widget.textclock()
+-- calendar.addCalendarToWidget(mytextclock)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -90,7 +90,7 @@ for s = 1, screen.count() do
     right_layout:add(v)
   end
 
-  right_layout:add(mytextclock)
+  -- right_layout:add(mytextclock)
   right_layout:add(mylayoutbox[s])
 
   -- Now bring it all together (with the tasklist in the middle)
