@@ -52,6 +52,10 @@ globalkeys = awful.util.table.join(
                 client.focus:raise()
             end
         end),
+    -- Brightness Keys
+    awful.key({ }, "XF86MonBrightnessUp", function () config.widgets.libs.brightness:up() end),
+    awful.key({ }, "XF86MonBrightnessDown", function () config.widgets.libs.brightness:down() end),
+
     -- Multimedia Keys
     awful.key({ }, "XF86AudioRaiseVolume", function () config.widgets.libs.volume:vol_up() end),
     awful.key({ }, "XF86AudioLowerVolume", function () config.widgets.libs.volume:vol_down() end),

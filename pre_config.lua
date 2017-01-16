@@ -49,6 +49,8 @@ config.widgets.divider = wibox.widget.textbox(" | ")
 
 config.widgets.layouts.right = {
   "config.widgets.divider",
+  "config.widgets.libs.brightness.icon",
+  "config.widgets.divider",
   "config.widgets.libs.volume.icon", -- volume
   "config.widgets.libs.volume.barmargin",
   "config.widgets.divider",

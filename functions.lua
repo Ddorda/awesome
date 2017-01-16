@@ -22,3 +22,10 @@ function countSet(set)
   for _ in pairs(set) do count = count + 1 end
   return count
 end
+
+function run(command)
+  local prog = io.popen(command)
+  local result = prog:read('*l')
+  prog:close()
+  return result
+end

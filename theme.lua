@@ -102,6 +102,10 @@ theme.vol_on = theme.icons_dir .. "vol_on.png"
 theme.vol_off = theme.icons_dir .. "vol_off.png"
 theme.vol_bg = "#000000"
 
+-- brighness icon should be number. eg. bright_0.png
+theme.brightness_prefix = theme.icons_dir .. "bright_"
+theme.brightness_extension = ".png"
+
 -- Define the icon theme for application icons. If not set then the icons 
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = nil
