@@ -5,13 +5,17 @@ volume.main_control = "Master"
 volume.refresh_timeout = 120
 volume.set_volume_cmd = "amixer set %s %s -D pulse"
 volume.get_info_cmd = "amixer get "
-volume.toggle = "toggle"
-volume.up_step = "5%+"
-volume.down_step = "5%-"
+volume.toggle_cmd = "toggle"
+volume.raise_step = "5%+"
+volume.lower_step = "5%-"
 volume.state = ""
 volume.level = 0
---widget functions
+volume.raise_key = {{ }, "XF86AudioRaiseVolume"}
+volume.lower_key = {{ }, "XF86AudioLowerVolume"}
+volume.toggle_key = {{ }, "XF86AudioMute"}
 
+
+--widget functions
 volume.execute_and_update_widget = function(self, command)
   --execute given command, parse it and update the widget
   local current_line
@@ -41,16 +45,16 @@ volume.set_volume = function(self, control, amount)
   self:execute_and_update_widget(string.format(self.set_volume_cmd, control, amount))
 end
 
-volume.vol_up = function(self)
-  self:set_volume(self.main_control, self.up_step)
+volume.raise = function(self)
+  self:set_volume(self.main_control, self.raise_step)
 end
 
-volume.vol_down = function(self)
-  self:set_volume(self.main_control, self.down_step)
+volume.lower = function(self)
+  self:set_volume(self.main_control, self.lower_step)
 end
 
-volume.vol_toggle = function(self)
-  self:set_volume(self.main_control, self.toggle)
+volume.toggle = function(self)
+  self:set_volume(self.main_control, self.toggle_cmd)
 end
 
 
@@ -80,6 +84,11 @@ volume._init = function()
   volume.timer = timer({timeout = volume.refresh_timeout})
   volume.timer:connect_signal("timeout", function()  volume:refresh() end)
   volume.timer:start()
+
+  -- volume keys
+  add_key(volume.raise_key, function () volume:raise() end)
+  add_key(volume.lower_key, function () volume:lower() end)
+  add_key(volume.toggle_key, function () volume:toggle() end)
 end
 
 return volume

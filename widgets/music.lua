@@ -4,6 +4,10 @@ music.template_cmd = "rhythmbox-client %s"
 music.toggle_cmd = "--play-pause"
 music.next_cmd = "--next"
 music.prev_cmd = "--previous"
+music.next_key = {{ }, "XF86AudioNext"}
+music.toggle_key = {{ }, "XF86AudioPlay"}
+music.prev_key = {{ }, "XF86AudioPrev"}
+
 
 music.control = function(self, command)
 	awful.util.spawn(string.format(self.template_cmd, command))
@@ -22,6 +26,9 @@ music.prev = function(self)
 end
 
 music._init = function()
+	add_key(music.next_key, function () config.widgets.libs.music:next() end)
+	add_key(music.toggle_key, function () config.widgets.libs.music:toggle() end)
+	add_key(music.prev_key, function () config.widgets.libs.music:prev() end)
 	return
 end
 

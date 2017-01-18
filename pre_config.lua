@@ -27,7 +27,7 @@ config.theme = beautiful
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
 config.keyboard.modkey = "Mod4"
-config.keyboard.switch_keys = {{ "Mod1" }, "Shift_L"}
+config.keyboard._global_keys = {} -- don't use directly, instead use add_key()
 config.programs.terminal = "x-terminal-emulator"
 config.programs.editor = os.getenv("EDITOR") or "vim"
 
@@ -62,3 +62,7 @@ config.widgets.layouts.right = {
   "config.widgets.libs.clockal.clock_widget" -- clock+calendar
 }
 
+function add_key(keys, func)
+  config.keyboard._global_keys = awful.util.table.join(config.keyboard._global_keys, 
+    awful.key(keys[1], keys[2], func))
+end

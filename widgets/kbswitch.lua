@@ -3,6 +3,7 @@ local kbswitch = {}
 
 kbswitch.init_command = 'setxkbmap -layout "us,il" -variant ",lyx" -option ""'
 kbswitch.primary_lang = 'us'
+kbswitch.change_layout_keys = {{ "Mod1" }, "Shift_L"}
 
 kbswitch.switch = function ()
   local current_kb
@@ -23,5 +24,6 @@ kbswitch._init = function()
   awful.util.spawn(kbswitch.init_command)
   kbswitch.widget = wibox.widget.textbox()
   kbswitch.set_layout(kbswitch.primary_lang)
+  add_key(kbswitch.change_layout_keys, function () kbswitch.switch() end)
 end
 return kbswitch

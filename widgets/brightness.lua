@@ -14,6 +14,9 @@ brightness.dec = "-dec"
 brightness.set = "-set"
 brightness.get = "-get"
 brightness.label = "%d%% Brightness"
+brightness.inc_keys = {{ }, "XF86MonBrightnessUp"}
+brightness.dec_keys = {{ }, "XF86MonBrightnessDown"}
+
 
 --widget functions
 brightness.execute_and_update_widget = function(self, command)
@@ -70,6 +73,10 @@ brightness._init = function()
   brightness.timer = timer({timeout = brightness.refresh_timeout})
   brightness.timer:connect_signal("timeout", function() brightness:refresh() end)
   brightness.timer:start()
+
+  -- set keys
+  add_key(brightness.inc_keys, function () brightness:up() end)
+  add_key(brightness.dec_keys, function () brightness:down() end)
 end
 
 return brightness

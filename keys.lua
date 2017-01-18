@@ -1,7 +1,7 @@
 -- {{{ Key bindings
 modkey = config.keyboard.modkey
 
-globalkeys = awful.util.table.join(
+config.keyboard._global_keys = awful.util.table.join(config.keyboard._global_keys,
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey, "Shift"   }, "Left",
@@ -52,20 +52,7 @@ globalkeys = awful.util.table.join(
                 client.focus:raise()
             end
         end),
-    -- Brightness Keys
-    awful.key({ }, "XF86MonBrightnessUp", function () config.widgets.libs.brightness:up() end),
-    awful.key({ }, "XF86MonBrightnessDown", function () config.widgets.libs.brightness:down() end),
 
-    -- Multimedia Keys
-    awful.key({ }, "XF86AudioRaiseVolume", function () config.widgets.libs.volume:vol_up() end),
-    awful.key({ }, "XF86AudioLowerVolume", function () config.widgets.libs.volume:vol_down() end),
-    awful.key({ }, "XF86AudioMute", function () config.widgets.libs.volume:vol_toggle() end),
-
-    -- Music
-    awful.key({ }, "XF86AudioNext", function () config.widgets.libs.music:next() end),
-    awful.key({ }, "XF86AudioPlay", function () config.widgets.libs.music:toggle() end),
-    awful.key({ }, "XF86AudioPrev", function () config.widgets.libs.music:prev() end),
-    
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(config.programs.terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
@@ -103,10 +90,7 @@ globalkeys = awful.util.table.join(
         if config.widgets.libs.kbswitch.set_layout(config.widgets.libs.kbswitch.primary_lang) then
           menubar.show()
         end
-      end),
-
-    -- Keyboard
-    awful.key(config.keyboard.switch_keys[1], config.keyboard.switch_keys[2], function () config.widgets.libs.kbswitch.switch() end)
+      end)
 )
 
 clientkeys = awful.util.table.join(
@@ -133,7 +117,7 @@ clientkeys = awful.util.table.join(
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, 9 do
-    globalkeys = awful.util.table.join(globalkeys,
+    config.keyboard._global_keys = awful.util.table.join(config.keyboard._global_keys,
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
                   function ()
@@ -180,5 +164,5 @@ clientbuttons = awful.util.table.join(
     awful.button({ modkey }, 3, awful.mouse.client.resize))
 
 -- Set keys
-root.keys(globalkeys)
+root.keys(config.keyboard._global_keys)
 -- }}}
