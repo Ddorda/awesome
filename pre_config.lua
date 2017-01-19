@@ -28,6 +28,12 @@ config.theme = beautiful
 -- However, you can use another modifier like Mod1, but it may interact with others.
 config.keyboard.modkey = "Mod4"
 config.keyboard._global_keys = {} -- don't use directly, instead use add_key()
+
+function add_key(keys, func)
+  config.keyboard._global_keys = awful.util.table.join(config.keyboard._global_keys, 
+    awful.key(keys[1], keys[2], func))
+end
+
 config.programs.terminal = "x-terminal-emulator"
 config.programs.editor = os.getenv("EDITOR") or "vim"
 
@@ -61,8 +67,3 @@ config.widgets.layouts.right = {
   "config.widgets.divider",
   "config.widgets.libs.clockal.clock_widget" -- clock+calendar
 }
-
-function add_key(keys, func)
-  config.keyboard._global_keys = awful.util.table.join(config.keyboard._global_keys, 
-    awful.key(keys[1], keys[2], func))
-end

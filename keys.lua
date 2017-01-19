@@ -71,14 +71,14 @@ config.keyboard._global_keys = awful.util.table.join(config.keyboard._global_key
 
     -- Prompt
     awful.key({ modkey },            "r",     function () 
-      if config.widgets.libs.kbswitch.set_layout(config.widgets.libs.kbswitch.primary_lang) then
+      if config.widgets.libs.kbswitch:set_layout(config.widgets.libs.kbswitch.primary_lang) then
         mypromptbox[mouse.screen]:run()
       end
     end),
 
     awful.key({ modkey }, "x",
               function ()
-                if config.widgets.libs.kbswitch.set_layout(config.widgets.libs.kbswitch.primary_lang) then
+                if config.widgets.libs.kbswitch:set_layout(config.widgets.libs.kbswitch.primary_lang) then
                   awful.prompt.run({ prompt = "Run Lua code: " },
                   mypromptbox[mouse.screen].widget,
                   awful.util.eval, nil,
@@ -87,7 +87,7 @@ config.keyboard._global_keys = awful.util.table.join(config.keyboard._global_key
               end),
     -- Menubar
     awful.key({ modkey }, "p", function()
-        if config.widgets.libs.kbswitch.set_layout(config.widgets.libs.kbswitch.primary_lang) then
+        if config.widgets.libs.kbswitch:set_layout(config.widgets.libs.kbswitch.primary_lang) then
           menubar.show()
         end
       end)
