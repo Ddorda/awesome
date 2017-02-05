@@ -7,7 +7,7 @@
 local clockal = {}
 clockal.calendar = {}
 clockal.current_day_format = '<span color="#ee7777"><b>%s</b></span>'
-clockal.clock_widget = awful.widget.textclock()
+clockal.clock_widget = wibox.widget.textclock()
 
 clockal.displayMonth = function(month, year, weekStart)
   local t,wkSt=os.time{year=year, month=month+1, day=0},weekStart or 1

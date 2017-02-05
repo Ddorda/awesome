@@ -52,9 +52,10 @@ battery.refresh = function(self)
   elseif self:is_battery() then
     self.icon:set_image(beautiful.battery)
   else
-    self.icon:set_image(beautiful.max)
+    self.icon:set_image(beautiful.layout_max)
   end
   local precentage = self:battery_precentage()
+  
   if (precentage < self.critical_precentage) then
     battery.bar:set_color(beautiful.battery_critical_fg)
   else
@@ -66,23 +67,23 @@ end
 --actual widget
 battery._init = function()
   battery.icon = wibox.widget.imagebox(beautiful.battery)
-  battery.bar = awful.widget.progressbar() 
+  battery.bar = wibox.widget.progressbar() 
   battery.bar:set_ticks(true)
   battery.bar:set_ticks_size(5)
-  battery.bar:set_width(48)
+  battery.bar.forced_width = 48
   battery.bar:set_max_value(100)
 
   battery.bar:set_color(beautiful.fg_normal)
   battery.bar:set_background_color(beautiful.battery_bg)
   battery.layout = wibox.layout.fixed.horizontal()
   battery.layout:add(battery.bar)
-  battery.barmargin = wibox.layout.margin(battery.layout, 2, 2, 5, 6)
+  battery.barmargin = wibox.container.margin(battery.layout, 2, 2, 5, 6)
   battery:refresh()
 
 
   --TODO add dbus event
   -- timer declaration
-  battery.timer = timer({timeout = battery.timeout})
+  battery.timer = gears.timer({timeout = battery.timeout})
   battery.timer:connect_signal("timeout", function()  battery:refresh() end)
   battery.timer:start()
 end

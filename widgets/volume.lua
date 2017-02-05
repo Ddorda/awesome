@@ -65,23 +65,23 @@ end
 --actual widget
 volume._init = function()
   volume.icon = wibox.widget.imagebox(beautiful.vol_on)
-  volume.bar = awful.widget.progressbar() 
+  volume.bar = wibox.widget.progressbar() 
   volume.bar:set_ticks(true)
   volume.bar:set_ticks_size(1)
-  volume.bar:set_width(48)
+  volume.bar.forced_width = 48
   volume.bar:set_max_value(100)
 
   volume.bar:set_color(beautiful.fg_normal)
   volume.bar:set_background_color(beautiful.volume_bg)
   volume.layout = wibox.layout.fixed.horizontal()
   volume.layout:add(volume.bar)
-  volume.barmargin = wibox.layout.margin(volume.layout, 0, 2, 5, 6)
+  volume.barmargin = wibox.container.margin(volume.layout, 0, 2, 5, 6)
   volume:refresh()
 
 
   --TODO add dbus event
   -- timer declaration
-  volume.timer = timer({timeout = volume.refresh_timeout})
+  volume.timer = gears.timer({timeout = volume.refresh_timeout})
   volume.timer:connect_signal("timeout", function()  volume:refresh() end)
   volume.timer:start()
 

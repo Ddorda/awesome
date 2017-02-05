@@ -9,8 +9,8 @@ autorun_apps =
       ['test'] = 'pgrep nm-applet',
       ['test_func'] = EQ_FUNC,
       ['expected'] = nil},
-   {['cmd'] = 'xscreensaver -no-splash',
-      ['test'] = 'pgrep xscreensaver',
+   {['cmd'] = config.keyboard.init_cmd,
+      ['test'] = 'echo',
       ['test_func'] = EQ_FUNC,
       ['expected'] = nil}
 }
@@ -20,7 +20,7 @@ for app = 1, #autorun_apps do
 	-- notice no output == nil
 	local test_output = io.popen(cur_app.test):read("*l")
 	if cur_app.test_func(test_output, cur_app.expected) then
-	   awful.util.spawn(cur_app.cmd)
+	   awful.spawn(cur_app.cmd)
 	end
 end
 

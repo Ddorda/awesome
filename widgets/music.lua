@@ -10,7 +10,7 @@ music.prev_key = {{ }, "XF86AudioPrev"}
 
 
 music.control = function(self, command)
-	awful.util.spawn(string.format(self.template_cmd, command))
+	awful.spawn(string.format(self.template_cmd, command))
 end
 
 music.toggle = function(self)

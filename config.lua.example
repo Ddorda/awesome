@@ -1,16 +1,14 @@
 -- Configurations
 
-config.widgets.enable = Set {'kbswitch', 'volume', 'battery', 'music'}
-
-config.keyboard.switch_keys = {{ "Mod1" }, "space"}
+config.widgets.enable = Set {'volume', 'battery', 'music'}
 
 -- Programs
 config.programs.terminal = "gnome-terminal"
 
--- Widgets
-config.widgets.libs.kbswitch.init_command = 'setxkbmap -layout "us,il" -option ""'
+-- languages / layout
+config.keyboard.init_cmd = 'setxkbmap -layout "us,il" -option ""'
 
--- battery
+-- widgets
 config.widgets.libs.battery.battery = "BAT0"
 config.widgets.libs.battery.ac = "AC0"
 

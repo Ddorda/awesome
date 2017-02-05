@@ -29,6 +29,9 @@ config.theme = beautiful
 config.keyboard.modkey = "Mod4"
 config.keyboard._global_keys = {} -- don't use directly, instead use add_key()
 
+-- will run on startup.
+config.keyboard.init_cmd = 'setxkbmap -layout "us,il" -variant ",lyx" -option "grp:alt_space_toggle"'
+
 function add_key(keys, func)
   config.keyboard._global_keys = awful.util.table.join(config.keyboard._global_keys, 
     awful.key(keys[1], keys[2], func))
@@ -52,8 +55,11 @@ for i=1, #justwidgets do
 end
 
 config.widgets.divider = wibox.widget.textbox(" | ")
+config.widgets.systray = wibox.widget.systray()
+config.widgets.keyboard = awful.widget.keyboardlayout()
 
 config.widgets.layouts.right = {
+  "config.widgets.systray",
   "config.widgets.divider",
   "config.widgets.libs.brightness.icon",
   "config.widgets.divider",
@@ -63,7 +69,7 @@ config.widgets.layouts.right = {
   "config.widgets.libs.battery.icon", -- battery
   "config.widgets.libs.battery.barmargin",
   "config.widgets.divider",
-  "config.widgets.libs.kbswitch.widget", -- keyboard
+  "config.widgets.keyboard", -- keyboard
   "config.widgets.divider",
   "config.widgets.libs.clockal.clock_widget" -- clock+calendar
 }

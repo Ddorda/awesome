@@ -52,7 +52,7 @@ end
 brightness.refresh = function(self)
   local b = self:get_brightness()
   local level = math.floor((b/100)*7)
-  self.icon:set_image(beautiful.brightness_prefix .. level .. beautiful.brightness_extension)
+  self.icon:set_image(beautiful.brightness_prefix .. tostring(level) .. beautiful.brightness_extension)
 end
 
 --actual widget
@@ -70,7 +70,7 @@ brightness._init = function()
 
   --TODO add dbus event
   -- timer declaration
-  brightness.timer = timer({timeout = brightness.refresh_timeout})
+  brightness.timer = gears.timer({timeout = brightness.refresh_timeout})
   brightness.timer:connect_signal("timeout", function() brightness:refresh() end)
   brightness.timer:start()
 

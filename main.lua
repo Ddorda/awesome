@@ -1,12 +1,12 @@
 -- Generic libs
 gears = require("gears") 
 awful = require("awful") 
-awful.rules = require("awful.rules") 
-awful.autofocus = require("awful.autofocus") 
+require("awful.autofocus") 
 wibox = require("wibox")
 beautiful = require("beautiful")
 naughty = require("naughty") 
 menubar = require("menubar") 
+hotkeys_popup = require("awful.hotkeys_popup").widget
 require("functions")
 
 require("pre_config")

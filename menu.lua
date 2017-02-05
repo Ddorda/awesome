@@ -3,13 +3,14 @@
 editor_cmd = config.programs.terminal .. " -e " .. config.programs.editor
 myawesomemenu = {
    { "manual", config.programs.terminal .. " -e man awesome" },
+   { "hotkeys", function() return false, hotkeys_popup.show_help end},
    { "edit config", editor_cmd .. " " .. awesome.conffile },
    { "restart", awesome.restart },
-   { "quit", awesome.quit }
+   { "quit", function() awesome.quit() end}
 }
 
 mymainmenu = awful.menu({ items = {
-	{ "awesome", myawesomemenu, beautiful.awesome_icon },
+  { "awesome", myawesomemenu, beautiful.awesome_icon },
     { "Debian", debian.menu.Debian_menu.Debian },
     { "open terminal", config.programs.terminal }
   }

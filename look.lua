@@ -1,16 +1,8 @@
 -- {{{ Variable definitions
 
--- {{{ Wallpaper
-if beautiful.wallpaper then
-    for s = 1, screen.count() do
-        gears.wallpaper.maximized(beautiful.wallpaper, s, true)
-    end
-end
--- }}}
-
 -- Table of layouts to cover with awful.layout.inc, order matters.
 if #config.layouts == 0 then
-  layouts =  {
+  awful.layout.layouts =  {
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
@@ -22,10 +14,14 @@ if #config.layouts == 0 then
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier,
-    awful.layout.suit.floating
+    awful.layout.suit.floating,
+    awful.layout.suit.corner.nw,
+    awful.layout.suit.corner.ne,
+    awful.layout.suit.corner.sw,
+    awful.layout.suit.corner.se,
   }
 else
-  layouts = config.layouts
+  awful.layout.layouts = config.layouts
 end
 
 -- }}}
