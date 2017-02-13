@@ -29,3 +29,8 @@ function run(command)
   prog:close()
   return result
 end
+
+-- startup functions
+EQ_FUNC = function(test_o, expected_o) return test_o == expected_o end
+NE_FUNC = function(test_o, expected_o) return test_o ~= expected_o end
+TRUE_FUNC = function(test_o, expected_o) return true end 

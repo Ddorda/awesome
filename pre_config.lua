@@ -40,6 +40,23 @@ end
 config.programs.terminal = "x-terminal-emulator"
 config.programs.editor = os.getenv("EDITOR") or "vim"
 
+
+--
+-- Startup 
+--
+
+config.autorun_apps =
+{
+   {['cmd'] = 'nm-applet',
+      ['test'] = 'pgrep nm-applet',
+      ['test_func'] = EQ_FUNC,
+      ['expected'] = nil},
+   {['cmd'] = config.keyboard.init_cmd,
+      ['test'] = '',
+      ['test_func'] = TRUE_FUNC, -- run anyway
+      ['expected'] = nil}
+}
+
 --
 -- Widgets
 --

@@ -1,6 +1,12 @@
 -- Configurations
 
-config.widgets.enable = Set {'volume', 'battery', 'music'}
+-- Startup
+config.autorun_apps = awful.util.table.join(config.autorun_apps, {
+  {['cmd'] = 'transmission-gtk',
+    ['test'] = 'pgrep transmission-gtk',
+    ['test_func'] = EQ_FUNC,
+    ['expected'] = nil}
+})
 
 -- Programs
 config.programs.terminal = "gnome-terminal"
@@ -9,6 +15,8 @@ config.programs.terminal = "gnome-terminal"
 config.keyboard.init_cmd = 'setxkbmap -layout "us,il" -option ""'
 
 -- widgets
+config.widgets.enable = Set {'volume', 'battery', 'music'}
+
 config.widgets.libs.battery.battery = "BAT0"
 config.widgets.libs.battery.ac = "AC0"
 
